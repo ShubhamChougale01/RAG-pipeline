@@ -1,0 +1,9 @@
+langchain
+langgraph
+langsmith
+qdrant-client
+streamlit
+openai
+python-dotenv
+PyPDF2
+pytest
