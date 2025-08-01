@@ -1,17 +1,23 @@
 import streamlit as st
-from src.agent import create_workflow
-from langchain_core.messages import HumanMessage
+from agent import create_workflow
+from dotenv import load_dotenv
+import warnings
+
+# Suppress Pydantic deprecation warning
+warnings.filterwarnings("ignore", category=DeprecationWarning, module="langchain_huggingface")
+
+# Load environment variables
+load_dotenv()
 
 st.title("AI Pipeline Demo")
-st.write("Ask about the weather or query the PDF document!")
 
-user_query = st.text_input("Enter your question:", value="")
-if st.button("Get Response"):
-    with st.spinner("Generating response..."):
-        try:
-            workflow = create_workflow()
-            response = workflow.invoke({"messages": [HumanMessage(content=user_query)]})
-            st.success("Response:")
-            st.write(response["messages"][-1].content)
-        except Exception as e:
-            st.error(f"An error occurred: {str(e)}")
+workflow = create_workflow()
+
+query = st.text_input("Enter your query (e.g., 'Weather in Tokyo' or 'What is cross-view goal specification?')")
+if st.button("Submit"):
+    if query:
+        result = workflow.invoke({"query": query, "response": "", "route": ""})
+        st.write("**Response**:")
+        st.write(result["response"])
+    else:
+        st.write("Please enter a query.")

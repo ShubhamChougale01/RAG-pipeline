@@ -3,6 +3,6 @@ from src.rag import RAGPipeline
 
 def test_rag_pipeline():
     rag = RAGPipeline()
-    response = rag.query("What is the main topic of the document?")
+    response = rag.query("What is the main objective of the paper?")
     assert isinstance(response, str)
-    assert len(response) > 0
+    assert "generalization" in response.lower()

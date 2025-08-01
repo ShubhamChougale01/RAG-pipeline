@@ -5,6 +5,11 @@ qdrant-client
 streamlit
 openai
 python-dotenv
-PyPDF2
+PyPDF
 pytest
 langchain_groq
+langchain_community
+langchain_qdrant
+sentence-transformers
+langchain-huggingface==0.0.3
+pydantic
