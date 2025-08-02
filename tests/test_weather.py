@@ -5,4 +5,4 @@ def test_weather_query():
     workflow = create_workflow()
     result = workflow.invoke({"query": "Weather in India", "response": "", "route": ""})
     assert isinstance(result["response"], str)
-    assert "weather in tokyo" in result["response"].lower()
+    assert "weather in India" in result["response"].lower()

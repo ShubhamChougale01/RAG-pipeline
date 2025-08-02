@@ -10,10 +10,8 @@ import os
 from dotenv import load_dotenv
 import warnings
 
-# Suppress Pydantic deprecation warning
-warnings.filterwarnings("ignore", category=DeprecationWarning, module="langchain_huggingface")
-
-# Load environment variables
+warnings.filterwarnings("ignore", category=DeprecationWarning)
+warnings.filterwarnings("ignore", category=FutureWarning)
 load_dotenv()
 
 class AgentState(TypedDict):
@@ -38,12 +36,12 @@ def create_workflow():
     def fetch_weather(state: AgentState) -> AgentState:
         try:
             api_key = os.getenv("OPENWEATHERMAP_API_KEY")
-            city = state["query"].split("weather in")[-1].strip()
+            city = state["query"].lower().replace("weather in", "").strip()
             url = f"http://api.openweathermap.org/data/2.5/weather?q={city}&appid={api_key}&units=metric"
             response = requests.get(url)
             response.raise_for_status()
             data = response.json()
-            weather = f"Weather in {city}: {data['weather'][0]['description']}, Temperature: {data['main']['temp']}°C"
+            weather = f"Weather in {city.capitalize()}: {data['weather'][0]['description']}, Temperature: {data['main']['temp']}°C"
             return {"query": state["query"], "response": weather, "route": state["route"]}
         except Exception as e:
             return {"query": state["query"], "response": f"Error fetching weather: {str(e)}", "route": state["route"]}
