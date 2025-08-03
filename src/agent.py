@@ -36,7 +36,8 @@ def create_workflow():
     def fetch_weather(state: AgentState) -> AgentState:
         try:
             api_key = os.getenv("OPENWEATHERMAP_API_KEY")
-            city = state["query"].lower().replace("weather in", "").strip()
+            query_lower = state["query"].lower()
+            city = query_lower.replace("weather in", "").replace("temperature in", "").strip()
             url = f"http://api.openweathermap.org/data/2.5/weather?q={city}&appid={api_key}&units=metric"
             response = requests.get(url)
             response.raise_for_status()

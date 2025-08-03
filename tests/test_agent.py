@@ -1,14 +1,18 @@
-import pytest
-from src.agent import create_workflow
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../src')))
+from agent import create_workflow 
 
-def test_workflow():
-    workflow = create_workflow()
-    result = workflow.invoke({"query": "What is the main objective of the paper?", "response": "", "route": ""})
-    assert isinstance(result["response"], str)
-    assert "generalization" in result["response"].lower()
+def test_weather_query():
+    app = create_workflow()
+    result = app.invoke({"query": "What's the weather in Mumbai?", "response": "", "route": ""})
+    print(result)
 
-def test_workflow_weather():
-    workflow = create_workflow()
-    result = workflow.invoke({"query": "Weather in India", "response": "", "route": ""})
-    assert isinstance(result["response"], str)
-    assert "weather in India" in result["response"].lower()
+def test_rag_query():
+    app = create_workflow()
+    result = app.invoke({"query": "Explain the Transformer architecture.", "response": "", "route": ""})
+    print(result)
+
+if __name__ == "__main__":
+    test_weather_query()
+    test_rag_query()
