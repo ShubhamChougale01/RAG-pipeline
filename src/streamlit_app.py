@@ -1,5 +1,5 @@
 import streamlit as st
-from master_agent import run_master_agent, get_tool_choice
+from master_agent import run_agent, tool_router
 from dotenv import load_dotenv
 import warnings
 
@@ -14,16 +14,17 @@ AI Pipeline Demo
 - Ask about Shubham's resume or the weather in any city.   
 """)
 
-query = st.text_input("Enter your query:", placeholder="e.g., 'Weather in India' or 'What is Shubham's experience?'")
+query = st.text_input("Enter your query:", placeholder="e.g., What's the weather in Mumbai?")
 
 if st.button("Submit", key="submit_button"):
     if query:
         with st.spinner("Processing your query..."):
-            tool = get_tool_choice(query)
-            response = run_master_agent(query)
+            state = tool_router({"query": query, "tool": "", "result": ""})
+            tool = state["tool"]
+            response = run_agent(query)
         st.subheader("Result")
         st.write(f"**Selected Tool**: {tool}")
         st.write(f"**Response**: {response}")
     else:
-        st.error("Please enter a query.")
+        st.error("Enter a query.")
 st.markdown("---")
