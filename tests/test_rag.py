@@ -1,8 +1,12 @@
-import pytest
-from src.rag import RAGPipeline
+import unittest
+from src.rag_chain import query_resume
 
-def test_rag_pipeline():
-    rag = RAGPipeline()
-    response = rag.query("What is the main objective of the paper?")
-    assert isinstance(response, str)
-    assert "generalization" in response.lower()
+class TestRAG(unittest.TestCase):
+    def test_query_resume(self):
+        query = "What is Shubham's experience?"
+        response = query_resume(query)
+        print("RAG Response:", response)
+        self.assertTrue(len(response) > 0)
+
+if __name__ == '__main__':
+    unittest.main()

@@ -58,3 +58,11 @@ See langsmith_screenshot.png for sample evaluation logs.
 Loom Video
 
 A Loom video explaining the code and LangSmith results is available at: [Insert Loom URL].
+
+
+
+----------
+qd - curl -L -O https://github.com/qdrant/qdrant/releases/download/v1.13.4/qdrant-aarch64-apple-darwin.tar.gz
+
+-- python3 -m unittest tests/test_rag.py
+-- to check collection - curl http://localhost:6333/collections

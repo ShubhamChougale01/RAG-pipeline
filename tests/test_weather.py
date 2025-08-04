@@ -1,8 +1,11 @@
-import pytest
-from src.agent import create_workflow
+import unittest
+from src.weather import get_weather
 
 def test_weather_query():
-    workflow = create_workflow()
+    workflow = get_weather()
     result = workflow.invoke({"query": "Weather in India", "response": "", "route": ""})
     assert isinstance(result["response"], str)
     assert "weather in India" in result["response"].lower()
+
+if __name__ == '__main__':
+    unittest.main()
