@@ -49,11 +49,17 @@ def tool_router(state: AgentState) -> AgentState:
     return {"query": state["query"], "tool": tool, "result": ""}
 
 def run_resume_rag(state: AgentState) -> AgentState:
-    result = query_resume(state["query"])
+    try:
+        result = query_resume(state["query"])
+    except Exception as e:
+        result = f"RAG Pipeline failed: {str(e)}"
     return {**state, "result": result}
 
 def run_weather_agent(state: AgentState) -> AgentState:
-    result = get_weather(state["query"])
+    try:
+        result = get_weather(state["query"])
+    except Exception as e:
+        result = f"Location not found: {str(e)}"
     return {**state, "result": result}
 
 def handle_unknown(state: AgentState) -> AgentState:
