@@ -2,23 +2,41 @@ AI Pipeline Implementation
 In this project we have created AI pipelines using LangChain, LangGraph, LangSmith, Qdrant, and Streamlitt to fetch real-time weather data and answer questions from a PDF using RAG.
 
 Project Structure
+
 RAG-pipeline/
+
 ├── src/
+
 │   ├── master_agent.py       # LangGraph workflow for routing queries
+
 │   ├── rag_chain.py          # RAG pipeline for resume using Qdrant and LangChain
+
 │   ├── weather.py            # Fetches weather data using OpenWeatherMap API
+
 │   ├── __init__.py           
+
 ├── tests/
+
 │   ├── test_agent.py         # Unit tests for master_agent.py
+
 │   ├── test_rag.py           # Unit tests for rag_chain.py
+
 │   ├── test_weather.py       # Unit tests for weather.py
+
 │   ├── __init__.py           
+
 ├── docs/
+
 │   ├── Shubham_re.pdf        # Resume PDF 
+
 ├── .env                      # Environment variables (API keys)
+
 ├── .gitignore                # Excludes sensitive files (e.g., .env, venv, PDFs)
+
 ├── qdrant_config.yaml        # Qdrant storage configuration
+
 ├── venv/                     # Virtual environment
+
 ├── requirements.txt          # Python dependencies
 
 Setup Instructions
