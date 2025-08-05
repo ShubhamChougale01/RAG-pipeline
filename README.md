@@ -63,7 +63,7 @@ pip install -r requirements.txt
 Make sure you have Qdrant installed, then run:
 
 ```bash
-qdrant --storage-path ~/qdrant_storage
+qdrant --config-path ./qdrant_config.yaml
 ```
 
 ### 5. Launch the Streamlit UI
